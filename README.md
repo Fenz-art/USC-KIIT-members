@@ -1,73 +1,56 @@
-# React + TypeScript + Vite
+# USC KIIT Members
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Monorepo structured for separate deployment targets.
 
-Currently, two official plugins are available:
+## Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+USC-KIIT-members/
+├─ frontend/          ← Vercel
+│  ├─ public/
+│  ├─ src/
+│  ├─ index.html
+│  ├─ vite.config.ts
+│  ├─ tsconfig.json
+│  └─ package.json
+│
+├─ backend/           ← Railway
+│  ├─ server/
+│  │  ├─ index.js
+│  │  ├─ routes/
+│  │  └─ config/
+│  └─ package.json
+│
+└─ README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Frontend
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `cd frontend`
+- `npm install`
+- Development: `npm run dev`
+- Build: `npm run build`
+- Preview: `npm run preview`
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Set `VITE_API_URL` environment variable to point to the backend (e.g. `https://your-railway-app.up.railway.app`).
+
+## Backend
+
+- `cd backend`
+- `npm install`
+- Start: `npm start`
+
+Environment variables required:
+
+- `PORT` (optional, defaults to 5000)
+- `MONGO_URI`
+- `CLOUDINARY_CLOUD_NAME`
+- `CLOUDINARY_API_KEY`
+- `CLOUDINARY_API_SECRET`
+
+Health check: `GET /api/health` → `{ status: "OK" }`
+
+## Notes
+
+- The root `package.json` contains no scripts and is not used for running the app.
+- Frontend API calls read `VITE_API_URL`; in local dev, Vite proxy targets `http://localhost:5000`.

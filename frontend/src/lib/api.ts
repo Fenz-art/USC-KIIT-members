@@ -1,5 +1,8 @@
+const API_URL = import.meta.env.VITE_API_URL || ''
+
 export async function api<T = unknown>(input: RequestInfo, init?: RequestInit): Promise<T> {
-  const res = await fetch(input, {
+  const url = typeof input === 'string' && input.startsWith('/') ? `${API_URL}${input}` : input
+  const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
       ...(init?.headers || {}),

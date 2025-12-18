@@ -3,6 +3,7 @@ import { useState } from 'react'
 export function useFileUpload() {
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const API_URL = import.meta.env.VITE_API_URL || ''
 
   const upload = async (file: File): Promise<string> => {
     setUploading(true)
@@ -10,7 +11,7 @@ export function useFileUpload() {
     const formData = new FormData()
     formData.append('file', file)
 
-    const res = await fetch('/api/uploads/avatar', {
+    const res = await fetch(`${API_URL}/api/uploads/avatar`, {
       method: 'POST',
       body: formData,
     })
