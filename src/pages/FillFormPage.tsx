@@ -1,4 +1,5 @@
-import { FormEvent, useState } from 'react'
+import type{ FormEvent } from 'react'
+import {  useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useFileUpload } from '../hooks/useFileUpload'
 import { api } from '../lib/api'
