@@ -39,13 +39,13 @@ export function MembersPage() {
         )}
 
         {!loading && !error && (
-          <div className="space-y-10">
+          <div className="space-y-16">
             {leads.length > 0 && (
               <section>
-                <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-uscGold">
+                <h2 className="mb-8 text-center text-3xl font-bold uppercase tracking-widest text-uscGold">
                   Leads
                 </h2>
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {leads.map((member) => (
                     <MemberCard key={member._id} member={member} />
                   ))}
@@ -55,10 +55,10 @@ export function MembersPage() {
 
             {Object.entries(domains).map(([domain, list]) => (
               <section key={domain}>
-                <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-slate-300">
+                <h2 className="mb-8 text-center text-3xl font-bold uppercase tracking-widest text-uscGold">
                   {domain}
                 </h2>
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {list.map((member) => (
                     <MemberCard key={member._id} member={member} />
                   ))}
