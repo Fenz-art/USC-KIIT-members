@@ -4,3 +4,4 @@
 
 [build.environment]
   SECRETS_SCAN_OMIT_PATHS = "server/config/env.ts"
+  SECRETS_SCAN_OMIT_KEYS = "PORT"
